@@ -5,13 +5,11 @@ var sim = {
     }
 }
 
-function simulator(args) {
-    
-    if (args == undefined) { return 'No arguments given' }
-    let command = args.split(/ + /g);
+function simulator() {
+    if (arguments == undefined) { return 'No arguments given' }
     
 
-    switch(command[0]) {
+    switch(arguments[0]) {
         case 'start':
             start()
             break;
@@ -21,7 +19,7 @@ function simulator(args) {
             break;
 
         case 'setTickSpeed':
-            setTickSpeed(command[1])
+            setTickSpeed(arguments[1])
             break
 
         default:
@@ -38,7 +36,7 @@ function simulator(args) {
     }
 
     function setTickSpeed(interval) {
-        if (interval > 0) { sim.tick.interval = parseInt(interval) }
-        else { sim.tick.interval = 10; return 'Interval too low, set to 10 miliseconds'}
+        if (interval > 10) { sim.tick.interval = parseInt(interval) }
+        else { sim.tick.interval = 10; console.log('Interval too low, set to 10 ms')}
     }
 }
