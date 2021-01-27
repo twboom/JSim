@@ -1,4 +1,4 @@
-let env = {
+let marketEnv = {
     persons: [],
 
 }
@@ -6,20 +6,24 @@ let env = {
 class person {
     constructor(index) {
         this.index = index;
-        this.randomWealth = Math.random();
-        this.products = 10 - 10 * this.randomWealth;
-        this.money = 100 * this.randomWealth;
+        this.randomWealth = 1 + Math.random() * 10;
+        this.products = Math.floor(this.randomWealth) * Math.floor(Math.random() * 10) + 1;
+        this.money = 10 * this.randomWealth * Math.random() * 10;
+        this.productCost = (this.money / this.products) * Math.random()
     };
 };
 
 function marketInit(personCount) {
     for (let i = 0; i < personCount; i++) {
         newPerson = new person(i);
-        env.persons.push(newPerson);
-    }
-}
+        marketEnv.persons.push(newPerson);
+        console.log(newPerson)
+    };
+};
 
 
 function market() {
+    for (let i = 0; i < marketEnv.persons.length; i++) {
 
+    };
 }

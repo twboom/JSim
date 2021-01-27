@@ -1,7 +1,7 @@
 let sim = {
     "tick": {
         "clock": "",
-        "interval": 20,        
+        "interval": 1000,        
     }
 };
 
