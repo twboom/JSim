@@ -1,9 +1,11 @@
-var sim = {
+let sim = {
     "tick": {
         "clock": "",
-        "interval": 10,        
+        "interval": 20,        
     }
-}
+};
+
+
 
 function simulator() {
     if (arguments == undefined) { return 'No arguments given' }
@@ -26,9 +28,8 @@ function simulator() {
             return 'No command';
     };
 
-
     function start() {
-        sim.tick.clock = setInterval(console.log, sim.tick.interval, 'hello');
+        sim.tick.clock = setInterval(market, sim.tick.interval, arguments);
     }
 
     function stop() {
@@ -37,6 +38,6 @@ function simulator() {
 
     function setTickSpeed(interval) {
         if (interval > 10) { sim.tick.interval = parseInt(interval) }
-        else { sim.tick.interval = 10; console.log('Interval too low, set to 10 ms')}
+        else { sim.tick.interval = 1; console.log('Interval too low, set to 1 ms') }
     }
 }
