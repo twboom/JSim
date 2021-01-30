@@ -10,7 +10,7 @@ class person {
         this.products = Math.floor(this.randomWealth) * Math.floor(Math.random() * 10) + 1;
         this.money = 10 * this.randomWealth * Math.random() * 10;
         this.productCost = (this.money / this.products) * Math.random();
-        this.status = {'bought': false, 'sold': true};
+        this.status = {'bought': false, 'sold': false};
         this.statistics = {'spend': 0, 'earned': 0}
     };
 };
@@ -31,8 +31,16 @@ function market() {
 }
 
 function cheapestSeller() {
+    let searchIndex = 0;
     const prices = marketEnv.persons.map(({ productCost }) => productCost);
     prices.sort();
-    const seller = marketEnv.persons.find( ({ productCost }) => productCost == prices[0])
-    return seller.index
+    let seller;
+    console.log(searchIndex)
+    function findSellerId(price) {
+        console.log(searchIndex)
+        seller = marketEnv.persons.find( ({ productCost }) => productCost == price)
+    }
+    findSellerId(prices[searchIndex])
+    if (seller.status.bought == true) { searchIndex += 1; console.log('new'+searchIndex); findSellerId(prices[searchIndex]) }
+    else { return seller.index }
 }
