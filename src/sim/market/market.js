@@ -30,8 +30,9 @@ function market() {
     };
 }
 
-function cheapestSeller() {
+function cheapestSeller(newIndex, buyer) {
     let searchIndex = 0;
+    if (newIndex !== undefined) { searchIndex += newIndex }
     const prices = marketEnv.persons.map(({ productCost }) => productCost);
     prices.sort();
     let seller;
@@ -41,6 +42,13 @@ function cheapestSeller() {
         seller = marketEnv.persons.find( ({ productCost }) => productCost == price)
     }
     findSellerId(prices[searchIndex])
-    if (seller.status.bought == true) { searchIndex += 1; console.log('new'+searchIndex); findSellerId(prices[searchIndex]) }
-    else { return seller.index }
+    if (seller.products === 0 || buyer.money < seller.productCost) { searchIndex += 1; cheapestSeller(searchIndex)}
+    else { console.log('def'+seller.index); return seller }
+}
+
+function transaction(buyer, seller) {
+    buyer.money -= seller.productCost;
+    seller.money += seller.productCost;
+    buyer.products += 1;
+    seller.products -= 1;
 }
