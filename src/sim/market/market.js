@@ -1,6 +1,6 @@
 let marketEnv = {
     persons: [],
-
+    round: 0
 }
 
 class person {
@@ -26,8 +26,11 @@ function marketInit(personCount) {
 
 function market() {
     for (let i = 0; i < marketEnv.persons.length; i++) {
-        
+        let seller = cheapestSeller(0, marketEnv.persons[i])
+        transaction(marketEnv.persons[i], seller)
     };
+    console.log('MARKET: Round ' + marketEnv.round + ' is finished.');
+    marketEnv.round += 1;
 }
 
 function cheapestSeller(newIndex, buyer) {
@@ -36,14 +39,12 @@ function cheapestSeller(newIndex, buyer) {
     const prices = marketEnv.persons.map(({ productCost }) => productCost);
     prices.sort();
     let seller;
-    console.log(searchIndex)
     function findSellerId(price) {
-        console.log(searchIndex)
         seller = marketEnv.persons.find( ({ productCost }) => productCost == price)
     }
     findSellerId(prices[searchIndex])
     if (seller.products === 0 || buyer.money < seller.productCost || seller.index === buyer.index) { searchIndex += 1; cheapestSeller(searchIndex)}
-    else { console.log('def'+seller.index); return seller }
+    else { console.log('Cheapest seller is: ' + seller.index); return seller }
 }
 
 function transaction(buyer, seller) {
@@ -51,9 +52,9 @@ function transaction(buyer, seller) {
     seller.money += seller.productCost;
     buyer.products += 1;
     seller.products -= 1;
-
     buyer.statistics.bought += 1;
     buyer.statistics.spend += seller.productCost;
     seller.statistics.sold += 1;
-    seller.statistics.earned += seller.productCost
+    seller.statistics.earned += seller.productCost;
+    console.log('Transaction: ' + buyer.index + ' to ' + seller.index + '. For $' + seller.productCost)
 }
