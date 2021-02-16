@@ -1,0 +1,10 @@
+[
+    {
+        "name": "market",
+        "files": ["market.js"]
+    },
+    {
+        "name": "jigsaw",
+        "files": ["jigsaw.js"]
+    }
+]
