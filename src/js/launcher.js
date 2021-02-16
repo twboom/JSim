@@ -23,13 +23,14 @@ function addOption(name, source) {
 
 function onLoad() {
     for (let i = 0; i < simList.length; i++) {
-        addOption(simList[i].name)
+        addOption(simList[i].name, simList[i].files[0])
     }
 };
 
 function boot() {
     let url = 'jsim.html';
     const selected = document.querySelector('input[name="enviroment"]:checked')
+    const source = simList.find( ({ name }) => name == selected.value ).files[0]
     console.log(selected)
 
     if (selected == null) {
@@ -37,8 +38,8 @@ function boot() {
         return
     }
     else url += '?simulator=' + selected.value
-    url += '&source=' + selected.source;
-    if (confirm('JSim will start with the "' + selected.value + '" simulator')) { window.location.replace(url) }
+    url += '&source=' + source;
+    if (confirm('JSim will start with the "' + selected.value + '" simulator (' + source + ')')) { window.location.replace(url) }
 };
 
 function addCustom() {
