@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSim Launcher</title>
-    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/launcher.css">
 </head>
 <body>
     <header>
@@ -13,6 +13,22 @@
         <p id="subTitle" class="header">Launcher</p>
     </header>
     <div id="content">
+        <div id="customOption" class="customOptionContainer">
+            <p id="customOptionTitle">Add custom simulator</p>
+            <label for="name">Name</label>
+            <input type="text" placeholder="Enter name">
+
+            <label for="source">Source file:</label>
+            <input type="text" placeholder="mySim.js">
+
+            <div id="submitContainer"><input type="submit" name="submit" value="Submit"></div>
+
+            <div class="customOptionContainer" id="moreButtons">
+                <div id="cancelContainer"><input type="reset" name="cancel" value="Cancel" onclick="document.querySelector('#customOption').style.display='none'"></div>
+                <div id="resetContainer"><input type="reset" name="reset" value="Reset"></div>
+            </div>
+        </div>
+        <button id="addOptionModal" onclick="document.querySelector('#customOption').style.display='block'">Add custom simulator</button>
         <div id="selector"></div>
         <button id="bootButton">LAUNCH</button>
     </div>

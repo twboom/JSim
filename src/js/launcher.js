@@ -7,26 +7,36 @@ fetch('data/simulators.json').then(
     }
 ).then(onLoad)
 
-function onLoad() {
-    for (let i = 0; i < simList.length; i++) {
-        let newOption = document.createElement('input');
+function addOption(name) {
+    let newOption = document.createElement('input');
         newOption.setAttribute('type', 'radio');
         newOption.setAttribute('name', 'enviroment')
-        newOption.setAttribute('value', simList[i].name)
+        newOption.setAttribute('value', name)
         document.querySelector('#selector').appendChild(newOption)
 
         let newLabel = document.createElement('label');
-        newLabel.setAttribute('for', simList[i].name);
-        newLabel.innerHTML = simList[i].name
+        newLabel.setAttribute('for', name);
+        newLabel.innerHTML = name
         document.querySelector('#selector').appendChild(newLabel)
+}
+
+function onLoad() {
+    for (let i = 0; i < simList.length; i++) {
+        addOption(simList[i].name)
     }
 };
 
 function boot() {
-    const url = 'jsim.html';
+    let url = 'jsim.html';
+    const selected = document.querySelector('input[name="enviroment"]:checked')
+    console.log(selected)
 
-    
-    //window.location.replace(url)
+    if (selected == null) {
+        alert('Please select a simulator')
+        return
+    }
+    else url += '?simulator=' + selected.value
+    if (confirm('JSim will start with the "' + selected.value + '" simulator')) { window.location.replace(url) }
 };
 
 document.querySelector('#bootButton').addEventListener('click', boot)

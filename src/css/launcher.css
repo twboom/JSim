@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+
+html {
+    font-family: 'Open Sans';
+}
+
+.header {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+#title.header {
+    font-size: 64px;
+}
+
+#subTitle.header {
+    font-size: 32px
+}
+
+#customOption {
+    display: none;
+    margin-left: 10vw;
+    border: solid rgb(136, 80, 80);
+    padding: 2.5vw;
+    padding-bottom: 10vh;;
+    width: 70vw;
+}
+
+p#customOptionTitle {
+    text-align: center;
+    font-size: xx-large;
+}
+
+input[type=text] {
+    font-family: 'Open Sans';
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    margin-bottom: +1px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.125s;
+}
+
+input[type=text]:hover {
+    border-bottom: 1px solid blue;
+}
+
+input[type=text]:focus {
+    border-bottom: 2px solid blue;
+    margin-bottom: +0px;
+}
+
+div#submitContainer {
+    width: 100%;
+    text-align: center;
+}
+
+div#moreButtons {
+    align-self: flex-end;
+    width: 100%;
+    display: flex;
+}
+
+div#cancelContainer {
+    width: 50%;
+}
+
+div#resetContainer {
+    width: 50%;
+    text-align: right;
+}
