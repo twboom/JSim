@@ -16,12 +16,12 @@
         <div id="customOption" class="customOptionContainer">
             <p id="customOptionTitle">Add custom simulator</p>
             <label for="name">Name</label>
-            <input type="text" placeholder="Enter name">
+            <input id="name" type="text" placeholder="Enter name">
 
             <label for="source">Source file:</label>
-            <input type="text" placeholder="mySim.js">
+            <input id="source" type="text" placeholder="mySim.js">
 
-            <div id="submitContainer"><input type="submit" name="submit" value="Submit"></div>
+            <div id="submitContainer"><input type="submit" name="submit" value="Submit" onclick="addCustom()"></div>
 
             <div class="customOptionContainer" id="moreButtons">
                 <div id="cancelContainer"><input type="reset" name="cancel" value="Cancel" onclick="document.querySelector('#customOption').style.display='none'"></div>
