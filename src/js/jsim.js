@@ -1,43 +1,35 @@
-let sim = {
+let simulator = [];
+simulator.env = {
     "tick": {
         "clock": "",
-        "interval": 1000,        
+        "interval": 1000,
+        "min": 10       
     }
 };
 
-
-
-function simulator() {
-    if (arguments == undefined) { return 'No arguments given' }
-    
-
-    switch(arguments[0]) {
-        case 'start':
-            start()
-            break;
-
-        case 'stop':
-            stop()
-            break;
-
-        case 'setTickSpeed':
-            setTickSpeed(arguments[1])
-            break
-
-        default:
-            return 'No command';
-    };
-
-    function start() {
-        sim.tick.clock = setInterval(market, sim.tick.interval, arguments);
-    }
-
-    function stop() {
-        clearInterval(sim.tick.clock)
-    }
-
-    function setTickSpeed(interval) {
-        if (interval > 10) { sim.tick.interval = parseInt(interval) }
-        else { sim.tick.interval = 1; console.log('Interval too low, set to 1 ms') }
-    }
+simulator.start = function() {
+    simulator.env.tick.clock = setInterval(market, simulator.env.tick.interval, arguments);
 }
+
+simulator.stop = function () {
+    clearInterval(simulator.env.tick.clock);
+};
+
+simulator.setTickSpeed = function(interval) {
+    if (interval > simulator.env.tick.min) { simulator.env.tick.interval = interval; return};
+    simulator.tick.interval = simulator.env.tick.min;
+}
+
+// Importing the correct simulator
+simulator.init = function () {
+    const params = (new URL(document.location)).searchParams;
+    const name = params.get('simulator');
+    const source = params.get('source');
+    console.log('JSim: Booted with ' + name + ' from ' + source)
+    
+    let script = document.createElement('script');
+    script.setAttribute('src', 'simulators/' + name + '/' + source)
+    document.head.appendChild(script)
+}
+
+simulator.init()
