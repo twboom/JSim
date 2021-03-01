@@ -12,6 +12,14 @@
         <div id="jsim" class="container level1">
             <div id="controls" class="container level2">
                 <p>Controls</p>
+                <div id="controlButtonContainers">
+                    <button id="startButton" onclick="jsim.start()">Start</button>
+                    <button id="stopButton" onclick="jsim.stop()">Stop</button>
+                    <button id="setTickspeed" onclick="jsim.interface.setTickspeed()">Tickspeed</button>
+                    <button id="reload" onclick="jsim.reload()">Reload</button>
+                </div>
+                <p>Tickspeed: <span id="tickspeedDisplay"></span> ms</p>
+                <p>Number of ticks: <span id="tickCount"></span></p>
             </div>
             <div id="console" class="container level2">
                 <p>Console</p>
@@ -26,5 +34,6 @@
             </div>
         </div>
     </div>
+    <script src="js/interface.js"></script>
 </body>
 </html>

@@ -5,14 +5,19 @@ jsim.env = {
         "interval": 1000,
         "min": 10       
     },
-    "sandbox": false
+    "sandbox": false,
+    "tickCount": 0
 };
 
+function dummy() { console.log('[ JSIM ]   Dummy function, arguments: ' + arguments)}
+
 jsim.start = function() {
-    simulator.env.tick.clock = setInterval(market, jsim.env.tick.interval, arguments);
+    console.log('[ JSIM ]   Started simulation')
+    jsim.env.tick.clock = setInterval(dummy, jsim.env.tick.interval, arguments);
 }
 
 jsim.stop = function () {
+    console.log('[ JSIM ]   Stopped simulation')
     clearInterval(jsim.env.tick.clock);
 };
 
@@ -21,14 +26,18 @@ jsim.setTickSpeed = function(interval) {
     jsim.tick.interval = jsim.env.tick.min;
 }
 
+jsim.reload = function() {
+    location.reload()
+}
+
 // Importing the correct simulator
 jsim.init = function () {
     const params = (new URL(document.location)).searchParams;
-    if (params.get('sandbox') === 'true') { console.log('JSim: Booted in sandbox mode'); jsim.sandbox = true; return}
+    if (params.get('sandbox') === 'true') { console.log('[ JSIM ]   Booted in sandbox mode'); jsim.sandbox = true; return }
     const name = params.get('simulator');
     const source = params.get('source');
     if (name === null || source === null) { window.location.replace('launcher.html') }
-    console.log('JSim: Booted with ' + name + ' from ' + source)
+    console.log('[ JSIM ]   Booted with ' + name + ' from ' + source)
     let script = document.createElement('script');
     script.setAttribute('src', 'simulators/' + name + '/' + source)
     document.head.appendChild(script)
