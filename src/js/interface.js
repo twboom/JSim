@@ -4,12 +4,12 @@ jsim.interface = [];
 
 jsim.interface.update = function(field, value) {
     field.innerHTML = value;
-    console.log('[ JSIM ]   Updated ' + field.id + ' to ' + value);
+    jsim.console.log('Updated ' + field.id + ' to ' + value, 'JSIM', 'InterfaceHandeler');
 }
 
 jsim.interface.setTickspeed = function() {
     const interval = prompt('Enter new tickspeed', jsim.env.tick.clock);
-    if (interval === '' || isNaN(interval) === true) {console.log('[ JSIM ]   New interval was not set, interval was not an interger'); return }
+    if (interval === '' || isNaN(interval) === true) {jsim.console.log('New interval was not set, interval was not an interger', 'JSIM', 'InterfaceHandeler'); return }
     else {
         jsim.interface.update(document.querySelector('span#tickspeedDisplay'), interval);
         jsim.setTickSpeed(interval);
@@ -19,9 +19,16 @@ jsim.interface.setTickspeed = function() {
 /* CONSOLE */
 jsim.console = [];
 
-jsim.console.log = function(value, origin) {
+jsim.console.log = function(value, programIn, origin) {
     if (origin === undefined) { origin = ''; }
-    console.log('[ JSIM ] ' + origin + ' :: ' + value)
+    if (programIn === undefined) { programIn = '' }
+    const program = programIn.toUpperCase();
+    const content = '[ ' + program + ' ] ' + origin + ' :: ' + value;
+    console.log(content);
+    let newOutput = document.createElement('p');
+    newOutput.setAttribute('id', 'consoleLine')
+    newOutput.innerHTML = content
+    document.querySelector('#consoleField').appendChild(newOutput)
 };
 
 /* INIT */

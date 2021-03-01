@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSim</title>
     <link rel="stylesheet" href="css/interface.css">
+    <link rel="stylesheet" href="css/scrollbar.css">
     <script src="js/jsim.js"></script>
 </head>
 <body>
@@ -19,10 +20,12 @@
                     <button id="reload" onclick="jsim.reload()">Reload</button>
                 </div>
                 <p>Tickspeed: <span id="tickspeedDisplay"></span> ms</p>
+                <p>Last tick time: <span id="lastTickTime"></span> ms</p>
                 <p>Number of ticks: <span id="tickCount"></span></p>
             </div>
             <div id="console" class="container level2">
-                <p>Console</p>
+                <p id="panelTitle">Console</p>
+                <div id="consoleField"></div>
             </div>
         </div>
         <div id="simulator" class="container level1">

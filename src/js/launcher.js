@@ -31,7 +31,7 @@ function boot(sandbox) {
     let url = 'jsim.html';
     if (sandbox === true) {
         url += '?sandbox=true'
-        if (confirm('JSIM will start in sandbox mode')) { window.location.replace(url); return }
+        if (confirm('JSIM will start in sandbox mode \n This will ignore your selected simulator')) { window.location.replace(url); return }
         else { return }
     };
     const selected = document.querySelector('input[name="enviroment"]:checked')

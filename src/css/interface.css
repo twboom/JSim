@@ -39,3 +39,15 @@ body {
         width: 100%;
     }
 }
+
+p#panelTitle {
+    background-color: #181A1B;
+    margin: 0;
+    padding: 16px;
+    width: 46%;
+}
+
+/* Console */
+div#console {
+    overflow-y: scroll;
+}

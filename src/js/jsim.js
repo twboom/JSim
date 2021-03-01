@@ -3,37 +3,53 @@ jsim.env = {
     "tick": {
         "clock": "",
         "interval": 1000,
-        "min": 10       
+        "min": 1       
     },
     "sandbox": false,
     "tickCount": 0,
     "interface": true,
-    "simulator": ''
+    "simulator": '',
+    "lastTick": 0,
 };
 
-function dummy() { console.log('[ JSIM ]   Dummy function, arguments: ' + arguments)}
+function dummy() {
+    jsim.console.log('Dummy function, arguments: ' + arguments, 'DUMMY', 'Function')
+    Math.sin(90 * Math.PI / 180);
+    Math.sin(90 * Math.PI / 180);
+    Math.sin(90 * Math.PI / 180);
+    Math.sin(90 * Math.PI / 180);
+}
 
 jsim.start = function() {
-    console.log('[ JSIM ]   Started simulation')
+    jsim.console.log('Started simulation', 'JSIM', 'SimHandeler')
     jsim.env.tick.clock = setInterval(jsim.tick, jsim.env.tick.interval, arguments);
 }
 
 jsim.stop = function () {
-    console.log('[ JSIM ]   Stopped simulation')
+    jsim.console.log('Stopped simulation', 'JSIM', 'SimHandeler')
     clearInterval(jsim.env.tick.clock);
 };
 
 jsim.setTickSpeed = function(interval) {
-    if (interval > jsim.env.tick.min) { jsim.env.tick.interval = interval; }
-    else { jsim.env.tick.interval = jsim.env.tick.min; if (jsim.env.interface === true) { jsim.interface.update(document.querySelector('span#tickspeedDisplay'), jsim.env.tick.min)} }
+    if (interval > jsim.env.tick.min) { jsim.env.tick.interval = interval; jsim.console.log('Set tickspeed to ' + interval, 'JSIM', 'SimHandeler') }
+    else { jsim.env.tick.interval = jsim.env.tick.min; if (jsim.env.interface === true) { jsim.interface.update(document.querySelector('span#tickspeedDisplay'), jsim.env.tick.min); jsim.console.log('Set tickspeed to ' + jsim.env.tick.min, 'JSIM', 'SimHandeler')} }
 };
 
 jsim.reload = function() {
     location.reload()
 };
 
-jsim.tick = function(simRunFunc) {
-    window[jsim.env.simulator]()
+jsim.tick = function() {
+    window[jsim.env.simulator]();
+    if (jsim.env.lastTick !== 0) {
+        const tickTime = Date.now() - jsim.env.lastTick;
+        const difference = jsim.env.tick.interval - tickTime
+        if (difference > jsim.env.tick.interval / 10) { jsim.console.log('Overloaded, JSIM is running too fast: ' + difference + ' ms too slow', 'JSIM', 'SimHandeler') }
+        document.querySelector('#lastTickTime').innerHTML = tickTime;
+        console.log(tickTime)
+        console.log(difference)
+    }
+    jsim.env.lastTick = Date.now()
     jsim.env.tickCount++;
     document.querySelector('#tickCount').innerHTML = jsim.env.tickCount;
 };
