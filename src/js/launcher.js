@@ -27,17 +27,22 @@ function onLoad() {
     }
 };
 
-function boot() {
+function boot(sandbox) {
     let url = 'jsim.html';
+    if (sandbox === true) {
+        url += '?sandbox=true'
+        if (confirm('JSIM will start in sandbox mode')) { window.location.replace(url); return }
+        else { return }
+    };
     const selected = document.querySelector('input[name="enviroment"]:checked')
-    const source = simList.find( ({ name }) => name == selected.value ).files[0]
-    console.log(selected)
-
     if (selected == null) {
         alert('Please select a simulator')
         return
     }
-    else url += '?simulator=' + selected.value
+    const source = simList.find( ({ name }) => name == selected.value ).files[0]
+    console.log(selected)
+
+    url += '?simulator=' + selected.value
     url += '&source=' + source;
     if (confirm('JSim will start with the "' + selected.value + '" simulator (' + source + ')')) { window.location.replace(url) }
 };
@@ -53,3 +58,4 @@ function addCustom() {
 };
 
 document.querySelector('#bootButton').addEventListener('click', boot)
+document.querySelector('#launchSandbox').addEventListener('click', function() { boot(true) })
