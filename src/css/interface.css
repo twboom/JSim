@@ -51,3 +51,8 @@ p#panelTitle {
 div#console {
     overflow-y: scroll;
 }
+
+/* Shell */
+div#shell {
+    overflow-y: scroll;
+}

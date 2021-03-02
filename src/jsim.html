@@ -12,15 +12,16 @@
     <div id="interface">
         <div id="jsim" class="container level1">
             <div id="controls" class="container level2">
-                <p>Controls</p>
+                <p id="panelTitle">Controls</p>
                 <div id="controlButtonContainers">
-                    <button id="startButton" onclick="jsim.start()">Start</button>
-                    <button id="stopButton" onclick="jsim.stop()">Stop</button>
-                    <button id="setTickspeed" onclick="jsim.interface.setTickspeed()">Tickspeed</button>
-                    <button id="reload" onclick="jsim.reload()">Reload</button>
+                    <button id="startButton">Start</button>
+                    <button id="stopButton">Stop</button>
+                    <button id="setTickspeed">Tickspeed</button>
+                    <button id="reload">Reload</button>
                 </div>
                 <p>Tickspeed: <span id="tickspeedDisplay"></span> ms</p>
                 <p>Last tick time: <span id="lastTickTime"></span> ms</p>
+                <p>Average tick time: <span id="avgTickTime"></span> ms</p>
                 <p>Number of ticks: <span id="tickCount"></span></p>
             </div>
             <div id="console" class="container level2">
@@ -30,13 +31,18 @@
         </div>
         <div id="simulator" class="container level1">
             <div id="dataVissualisation" class="container level2">
-                <p>Data Vissualisation</p>
+                <p id="panelTitle">Data Vissualisation</p>
             </div>
             <div id="shell" class="container level2">
-                <p>Shell</p>
+                <p id="panelTitle">Shell</p>
+                <div id="shellField"></div>
             </div>
         </div>
     </div>
     <script src="js/interface.js"></script>
+    <script>
+        jsim.interface.init()
+        jsim.init();
+    </script>
 </body>
 </html>

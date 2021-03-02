@@ -29,7 +29,25 @@ jsim.console.log = function(value, programIn, origin) {
     newOutput.setAttribute('id', 'consoleLine')
     newOutput.innerHTML = content
     document.querySelector('#consoleField').appendChild(newOutput)
+    const consoleDiv = document.getElementById("console");
+    consoleDiv.scrollTop = consoleDiv.scrollHeight;
 };
+
+/* SHELL */
+jsim.shell = [];
+
+jsim.shell.log = function(value, origin) {
+    if (origin === undefined) { origin = ''; }
+    const program = jsim.env.simulator.toUpperCase();
+    const content = '[ ' + program + ' ] ' + origin + ' :: ' + value;
+    console.log(content);
+    let newOutput = document.createElement('p');
+    newOutput.setAttribute('id', 'shellLine')
+    newOutput.innerHTML = content
+    document.querySelector('#shellField').appendChild(newOutput)  
+    const shellDiv = document.getElementById("shell");
+    shellDiv.scrollTop = shellDiv.scrollHeight;
+}
 
 /* INIT */
 
@@ -38,4 +56,7 @@ jsim.interface.init = function() {
     document.querySelector('#tickCount').innerHTML = jsim.env.tickCount;
 }
 
-jsim.interface.init()
+document.querySelector('#startButton').addEventListener('click', function() { if (jsim.env.active === false) { jsim.start() }})
+document.querySelector('#stopButton').addEventListener('click', function() { if (jsim.env.active === true) { jsim.stop() }})
+document.querySelector('#setTickspeed').addEventListener('click', jsim.interface.setTickspeed)
+document.querySelector('#reload').addEventListener('click', jsim.reload)
